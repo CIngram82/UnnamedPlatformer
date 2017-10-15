@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="13" tilewidth="16" tileheight="16" nextobjectid="87">
+ <tileset firstgid="1" source="caveBG.tsx"/>
+ <tileset firstgid="65" source="bg_solid_colors.tsx"/>
+ <tileset firstgid="193" source="cave.tsx"/>
+ <tileset firstgid="721" source="smb_gutter.tsx"/>
+ <layer name="background layer" width="80" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzl10duwzAUhGE5vffenN5778nlrBtE580vwAQGYxrIyhKYxQdZGq8GjxTVyLKsD/0YwCCGMIwRNBLIf7poteVyzSXz5+F3IfejGMM4JjCJKUxjJqFceyvaYj0Vdq8dh1yfzWIO81jAIpawjJXEcp+9POucLc+8u8KerWIN69jAJrbQxHaCuc+hzlSexfvV3nT2ymc72MUe9nGAQxzhONHc13Ho0dendurrNszmCU5xhnNc4BJXuE44j+2H2qW+XwKdy/C/G9ziDvd4wCOe8Jx4rv21ss41HXtf+774gle84R0f+MQXvv9BHjrrtqa9Y98v63A+qzLX/nQf/MveV17rcj6rKvf+/Pyn97H5q9P5rIrc5y72DaL9+bmxbuezXuf+zvDzTKxT7bCO57Ne5v7O8HXs3xuqzH4BTmzZtw==
+  </data>
+ </layer>
+ <layer name="graphics layer" width="80" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzVl0lPFEEYhrsrMfEAoiIHNVEQkcWDmIh45CKLor/AnRmGvwDDmE48cWIZfoPAWeEkyxX05HpDr+ORoNGbT9FdUPRU0U3THcObPPm6lu6q752vl7nkOs5laIQmuALPA7LQpOv0TME0zEAZZiHp9c6zzwswAPcM8SJsMu87/EgrCU23uH4X3IZuuJORb0qjeDUGRRiHErw8gn832G8nPIVnhngTtpn3C37DOmyklIuU/I3uwyA8gIcZ+zeEVznYEM7aOhQ4Hjmkf4/cavR+qbvEXugL6lPWYY2bfh0q7164O7k5uYz9U3qLd28gybkm/3QPdan6zKoOtxzfu+Mik2/Ummebn3UdnnT/r3+bwieubHUXJVsdHlVx6+8Vc/6cSGHBFHRYz6X0OuwP3s81KdSNqj+bhx/ZZ0X4MU0ts96KZc0J1ycLPea6T4L3c5xvtBx552EYCgYPZP1NiPj3sCnvcF9F7NVIxbCm9OYTfDb4lKV3STTG/oswDiWLf8PsN+/ujwVLDirvqL6wlMdDgT8V+AlzAVFKcs8qxX1GmjTFmtMwA2XD+vL+5TvWKYZiyeBpXstb71d9uud/A5T0ejvIPzm2yD6XUn5eJNVr9jEH87BgqT/+Rzn8n9oXywZPo6LNc91jW1uP79nnB7HXDs+pZ+wcNGj5cOzR59UHnGHsrKg+txZOQR2c9vHqfIztd1xjGVZgVezO2UXW3xf4Ct+0uGDwNCom8TxODPe1k0cHXNf849ijz2PMa4NWxtpE9bnNcBVa4JqP1+Jjax/IP7fOyGw=
+  </data>
+ </layer>
+ <objectgroup name="bricks">
+  <object id="62" x="352" y="128" width="16" height="16"/>
+  <object id="64" x="368" y="128" width="16" height="16"/>
+  <object id="65" x="512" y="80" width="16" height="16"/>
+  <object id="66" x="528" y="80" width="16" height="16"/>
+  <object id="67" x="128" y="112" width="16" height="16"/>
+  <object id="68" x="160" y="112" width="16" height="16"/>
+  <object id="69" x="672" y="144" width="16" height="16"/>
+  <object id="70" x="688" y="144" width="16" height="16"/>
+  <object id="71" x="720" y="96" width="16" height="16"/>
+  <object id="72" x="736" y="96" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="coins">
+  <object id="59" x="144" y="112" width="16" height="16"/>
+  <object id="60" x="336" y="128" width="16" height="16"/>
+  <object id="61" x="384" y="128" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Ground">
+  <object id="6" x="16" y="160" width="16"/>
+  <object id="12" x="16" y="188" width="742" height="16"/>
+  <object id="14" x="16" y="172" width="304" height="16"/>
+  <object id="16" x="16" y="155" width="96" height="21"/>
+  <object id="20" x="810" y="188" width="469" height="20"/>
+  <object id="21" x="16" y="160" height="48"/>
+  <object id="28" x="0" y="0" width="16" height="208"/>
+  <object id="33" x="16" y="0" width="16" height="64"/>
+  <object id="34" x="32" y="16" width="16" height="32"/>
+  <object id="35" x="48" y="0" height="16"/>
+  <object id="36" x="48" y="0" width="16" height="32"/>
+  <object id="37" x="64" y="0" width="16" height="16"/>
+  <object id="39" x="470" y="6" width="52" height="32"/>
+  <object id="43" x="976" y="80" width="48" height="48"/>
+  <object id="44" x="960" y="48" width="16" height="64"/>
+  <object id="45" x="976" y="64" width="16" height="16"/>
+  <object id="46" x="944" y="32" width="16" height="64"/>
+  <object id="47" x="928" y="16" width="16" height="64"/>
+  <object id="49" x="912" y="0" width="16" height="64"/>
+  <object id="50" x="896" y="0" width="16" height="48"/>
+  <object id="51" x="800" y="0" width="96" height="32"/>
+  <object id="52" x="784" y="0" width="16" height="32"/>
+  <object id="53" x="768" y="0" width="16" height="16"/>
+  <object id="85" x="448" y="0" width="21" height="27.3333"/>
+  <object id="86" x="522.33" y="1" width="20" height="27.6667"/>
+ </objectgroup>
+ <objectgroup name="Pillers">
+  <object id="55" x="480" y="122" width="32" height="66"/>
+  <object id="56" x="416" y="153" width="32" height="39"/>
+  <object id="57" x="272" y="137" width="32" height="39"/>
+  <object id="58" x="192" y="138" width="32" height="38"/>
+  <object id="73" x="1171" y="128" width="25" height="64"/>
+  <object id="75" x="1160" y="176" width="16" height="16"/>
+  <object id="78" x="1191" y="176" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="gombas">
+  <object id="79" x="240" y="156" width="16" height="16"/>
+  <object id="80" x="368" y="172" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="turtle">
+  <object id="81" x="560" y="172" width="16" height="16"/>
+  <object id="82" x="1072" y="172" width="16" height="16"/>
+ </objectgroup>
+</map>
