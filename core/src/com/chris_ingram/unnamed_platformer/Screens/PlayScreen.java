@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
 import com.chris_ingram.unnamed_platformer.Sprites.Hero;
+import com.chris_ingram.unnamed_platformer.Tools.B2WoldCreator;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
@@ -48,73 +49,15 @@ public class PlayScreen implements Screen{
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Test1.tmx");
+        map = mapLoader.load("Cave1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/UnnamedPlatformer.PPM);
         gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
 
         world = new World(new Vector2(0,-10), true);
         b2dr = new Box2DDebugRenderer();
 
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
+        new B2WoldCreator(world,map);
 
-        // create ground bodies/fixtures
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX()+rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getY()+rect.getHeight()/2)/UnnamedPlatformer.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getHeight()/2)/UnnamedPlatformer.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        // create pipe bodies/fixtures
-        for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX()+rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getY()+rect.getHeight()/2)/UnnamedPlatformer.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getHeight()/2)/UnnamedPlatformer.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        // create brick bodies/fixtures
-        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX()+rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getY()+rect.getHeight()/2)/UnnamedPlatformer.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getHeight()/2)/UnnamedPlatformer.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        // create coin bodies/fixtures
-        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX()+rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getY()+rect.getHeight()/2)/UnnamedPlatformer.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox((rect.getWidth()/2)/UnnamedPlatformer.PPM,(rect.getHeight()/2)/UnnamedPlatformer.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
 
         player = new Hero(world);
 
@@ -181,6 +124,11 @@ public class PlayScreen implements Screen{
 
     @Override
     public void dispose() {
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+        hud.dispose();
 
     }
 }

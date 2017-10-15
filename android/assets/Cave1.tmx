@@ -4,14 +4,15 @@
  <tileset firstgid="65" source="bg_solid_colors.tsx"/>
  <tileset firstgid="193" source="cave.tsx"/>
  <tileset firstgid="721" source="smb_gutter.tsx"/>
+ <tileset firstgid="1645" source="Atles.tsx"/>
  <layer name="background layer" width="80" height="13">
   <data encoding="base64" compression="zlib">
-   eJzl10duwzAUhGE5vffenN5778nlrBtE580vwAQGYxrIyhKYxQdZGq8GjxTVyLKsD/0YwCCGMIwRNBLIf7poteVyzSXz5+F3IfejGMM4JjCJKUxjJqFceyvaYj0Vdq8dh1yfzWIO81jAIpawjJXEcp+9POucLc+8u8KerWIN69jAJrbQxHaCuc+hzlSexfvV3nT2ymc72MUe9nGAQxzhONHc13Ho0dendurrNszmCU5xhnNc4BJXuE44j+2H2qW+XwKdy/C/G9ziDvd4wCOe8Jx4rv21ss41HXtf+774gle84R0f+MQXvv9BHjrrtqa9Y98v63A+qzLX/nQf/MveV17rcj6rKvf+/Pyn97H5q9P5rIrc5y72DaL9+bmxbuezXuf+zvDzTKxT7bCO57Ne5v7O8HXs3xuqzH4BTmzZtw==
+   eJzl10duwzAUhGE6vffee++9J5ezbhCdN78AExiMZSCL2BaYxQdZGsOLwSNF10IIPehFH/oxgEEMoZZA/t1CvSGTayaZP4+fc7kfxghGMYZxTGASUwnl2lveUNZTbvfaccz12TRmMIs5zGMBi1hKLPfZy0LzbHnm3eX2bBkrWMUa1rGBTWwlmPsc6kxlobxf7U1nr3i2jR3sYg/7OMAhjhLNfR3HHn19aqe+buNsHuMEpzjDOS5wiauE87L9ULvU90ukcxm/d40b3OIO93jAI54Sz7W/emhe02Xva98Xn/GCV7zhHR/4xNc/yGNnrda0d+z7ZTvPX6HNv/8Xufan++Bv9r7iWpXzWbdy78/Pf3pfNn9VOp91I/e5K/sPov35ubFq57NO5/7O8PNMWafaYRXPZ53M/Z3h69j/b6gi+wEfTNmv
   </data>
  </layer>
  <layer name="graphics layer" width="80" height="13">
   <data encoding="base64" compression="zlib">
-   eJzVl0lPFEEYhrsrMfEAoiIHNVEQkcWDmIh45CKLor/AnRmGvwDDmE48cWIZfoPAWeEkyxX05HpDr+ORoNGbT9FdUPRU0U3THcObPPm6lu6q752vl7nkOs5laIQmuALPA7LQpOv0TME0zEAZZiHp9c6zzwswAPcM8SJsMu87/EgrCU23uH4X3IZuuJORb0qjeDUGRRiHErw8gn832G8nPIVnhngTtpn3C37DOmyklIuU/I3uwyA8gIcZ+zeEVznYEM7aOhQ4Hjmkf4/cavR+qbvEXugL6lPWYY2bfh0q7164O7k5uYz9U3qLd28gybkm/3QPdan6zKoOtxzfu+Mik2/Ummebn3UdnnT/r3+bwieubHUXJVsdHlVx6+8Vc/6cSGHBFHRYz6X0OuwP3s81KdSNqj+bhx/ZZ0X4MU0ts96KZc0J1ycLPea6T4L3c5xvtBx552EYCgYPZP1NiPj3sCnvcF9F7NVIxbCm9OYTfDb4lKV3STTG/oswDiWLf8PsN+/ujwVLDirvqL6wlMdDgT8V+AlzAVFKcs8qxX1GmjTFmtMwA2XD+vL+5TvWKYZiyeBpXstb71d9uud/A5T0ejvIPzm2yD6XUn5eJNVr9jEH87BgqT/+Rzn8n9oXywZPo6LNc91jW1uP79nnB7HXDs+pZ+wcNGj5cOzR59UHnGHsrKg+txZOQR2c9vHqfIztd1xjGVZgVezO2UXW3xf4Ct+0uGDwNCom8TxODPe1k0cHXNf849ijz2PMa4NWxtpE9bnNcBVa4JqP1+Jjax/IP7fOyGw=
+   eJzVl0lPFEEYhqs7gXBAQMGDkoAbgnhAE1mOXFjc+QGCLDOMfwGGMZ144kBYht/AcuAfAJ7histNverRqNGbT9FdpOipopumO8qbPPm6q2q6+3t5m6lpcYRohWtwHW7AREAWWnRE/xIswwqUYRWSXu8Kz3kVHsIjQ22GT6z7DF/SakLTA67fDT3QC30Z+aY0g1ezUIQ5KMHrM/jXxfPeg5cwbqj34QfrfsIv2IP9lHqRkn+jx/AEnsKzjP2bwqsc5GEaCvDqlP69cCrRx6UGqIMwFORT5rDWST+HyrtJ57A3kcvYP6XneDaSMHcm/3QPdal8ZpXD78L37rzI5BtZ82zrs85hjfNv/Vuo9okrW+6iZMvhWRU3f29Y87sqhRumoNN6LqXncDj4fq5NITcqfzYP5XNuJXjeKO1wv13LPecdnyw0ynXHgu/nOHu0nCtEHqah4FbOy/zNu/HfYVPf4TGVD5vv0psDeGfwKUvvkmgWb4owByWLf+wjBPuJY7Vg6UH1HTUWlvJ4KvDnK3yD9YAoJXlnleL+jzRpCc+WYQXKBv/k+8s+VhRDtWTwNK/1rY+rMd3zPwFKet5O8k/OsbcRI/9JBtfwbB02YNOSP35HCX5PHatlg6dR1ea57rHtXK/qOHyuaiN9NMFlrR+OPca8xoCLzF1yKz97AeqgHhp8vHof4/k219iBXXjrHq05QubvPXyAj1rdNHgaVZN4HqeGx+7QRyfc1fzj2GPMY87rgHbmOtzKz96EW9AGt328Nh/b+Yn8BQLUv4o=
   </data>
  </layer>
  <objectgroup name="bricks">
