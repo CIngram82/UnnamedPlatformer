@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="120" height="40" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" source="UnTest00.tsx"/>
+ <layer name="Ground" width="120" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2jEKg0AURdGfDWl6zZpCduNyI6hgEQIRguPjFKea5sFlpprpVjUBAAAAAAAAAADws7HO38B/+z40jvWtb+l+efpm8z5n0zebvtn0zaZvNn2z6ZtN32z6ZtM3m77Z9M3WSt9u3tCv7g3sSdFK36GWLa3sSbH93+jrXK9d3+eHc3f6eN8rcKePeQMKRwQa
+  </data>
+ </layer>
+ <layer name="BackGround" width="120" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAAAAAAAAAAAAAAADgZ0sAAAE=
+  </data>
+ </layer>
+</map>

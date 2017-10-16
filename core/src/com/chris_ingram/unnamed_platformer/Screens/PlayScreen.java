@@ -5,18 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -31,6 +25,7 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 public class PlayScreen implements Screen{
     private UnnamedPlatformer game;
+    private TextureAtlas atlas;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
@@ -43,6 +38,7 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer b2dr;
     public PlayScreen(UnnamedPlatformer game) {
+        atlas = new TextureAtlas("hero_and_Enemies.pack");
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(UnnamedPlatformer.V_WIDTH /UnnamedPlatformer.PPM,UnnamedPlatformer.V_HEIGHT/UnnamedPlatformer.PPM, gameCam);
@@ -59,9 +55,11 @@ public class PlayScreen implements Screen{
         new B2WoldCreator(world,map);
 
 
-        player = new Hero(world);
+        player = new Hero(world, this);
+    }
 
-
+    public TextureAtlas getAtlas(){
+        return atlas;
     }
 
     @Override
@@ -83,6 +81,7 @@ public class PlayScreen implements Screen{
         handleInput(dt);
 
         world.step(1/60f, 6, 2);
+        player.update(dt);
         gameCam.position.x = player.b2body.getPosition().x;
         gameCam.update();
         renderer.setView(gameCam);
@@ -98,6 +97,11 @@ public class PlayScreen implements Screen{
         renderer.render();
 
         b2dr.render(world, gameCam.combined);
+
+        game.batch.setProjectionMatrix((gameCam.combined));
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
     }
