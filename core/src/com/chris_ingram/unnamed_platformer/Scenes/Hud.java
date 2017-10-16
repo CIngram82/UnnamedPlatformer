@@ -55,7 +55,7 @@ public class Hud implements Disposable{
         worldLabel = new Label("World",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         heroLabel = new Label("Hero",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(heroLabel).expandX().padTop(5).;
+        table.add(heroLabel).expandX().padTop(5);
         table.add(worldLabel).expandX().padTop(5);
         table.add(timeLabel).expandX().padTop(5);
         table.row();
