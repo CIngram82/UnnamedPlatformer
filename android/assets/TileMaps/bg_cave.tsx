@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset name="bg_cave" tilewidth="16" tileheight="16" tilecount="64" columns="8">
- <image source="../../../opp3_cave_tiles/opp3_cave_tiles/environment/background/bg_cave.png" width="128" height="128"/>
+ <image source="bg_cave.png" width="128" height="128"/>
 </tileset>

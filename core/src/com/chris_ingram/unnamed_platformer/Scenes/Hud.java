@@ -22,20 +22,20 @@ public class Hud implements Disposable{
 
     private Integer worldTimer;
     private float timeCount;
-    private Integer score;
+    private static Integer score;
 
-    Label countdownLable;
-    Label scoreLabel;
+    private Label countdownLable;
+    private static Label scoreLabel;
 
     @Override
     public void dispose() {
         stage.dispose();
     }
 
-    Label timeLabel;
-    Label levelLabel;
-    Label worldLabel;
-    Label heroLabel;
+    private Label timeLabel;
+    private Label levelLabel;
+    private Label worldLabel;
+    private Label heroLabel;
 
     public Hud(SpriteBatch sb){
         worldTimer = 300;
@@ -51,18 +51,30 @@ public class Hud implements Disposable{
         countdownLable =  new Label(String.format("%03d", worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d",score),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Time",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1-1",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("World",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label("Cave Exit",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel = new Label("Level",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         heroLabel = new Label("Hero",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(heroLabel).expandX().padTop(5);
-        table.add(worldLabel).expandX().padTop(5);
-        table.add(timeLabel).expandX().padTop(5);
+        table.add(heroLabel).expandX().padTop(3);
+        table.add(worldLabel).expandX().padTop(3);
+        table.add(timeLabel).expandX().padTop(3);
         table.row();
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(countdownLable).expandX();
 
         stage.addActor(table);
+    }
+    public void update(float dt){
+        timeCount += dt;
+        if(timeCount >= 1) {
+            worldTimer--;
+            countdownLable.setText(String.format("%03d", worldTimer));
+            timeCount = 0;
+        }
+    }
+    public static void addScore(int value){
+        score += value;
+        scoreLabel.setText(String.format("%06d", score));
     }
 }

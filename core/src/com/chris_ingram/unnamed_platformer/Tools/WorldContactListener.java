@@ -1,12 +1,11 @@
 package com.chris_ingram.unnamed_platformer.Tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.chris_ingram.unnamed_platformer.Sprites.InteravtiveTileObject;
+import com.chris_ingram.unnamed_platformer.Sprites.interavtiveTileObject;
 
 /**
  * Created by cingr on 10/16/2017.
@@ -22,8 +21,8 @@ public class WorldContactListener implements ContactListener{
             Fixture head = fixA.getUserData() == "head" ? fixA: fixB;
             Fixture object = head == fixA ? fixB : fixA;
 
-            if(object.getUserData() instanceof InteravtiveTileObject){
-                ((InteravtiveTileObject) object.getUserData()).onHeadHit();
+            if(object.getUserData() instanceof interavtiveTileObject){
+                ((interavtiveTileObject) object.getUserData()).onHeadHit();
             }
         }
     }

@@ -33,7 +33,6 @@ public class Hero extends Sprite {
 
 
     public Hero(World world, PlayScreen screen){
-//        super(screen.getAtlas().findRegion("idle"));
         this.world = world;
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -54,7 +53,6 @@ public class Hero extends Sprite {
         heroFall = new Animation<TextureRegion>(0.1f,frames);
         frames.clear();
         defineHero();
-//        heroStand = new TextureRegion(getTexture(),356,19,32,64);
         heroStand = new TextureRegion(screen.getAtlas().findRegion("idle"),0,8,32,64);
         setBounds(0,0,12/UnnamedPlatformer.PPM,24/UnnamedPlatformer.PPM);
         setRegion(heroStand);
@@ -115,19 +113,21 @@ public class Hero extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8/UnnamedPlatformer.PPM);
+        shape.setRadius(6/UnnamedPlatformer.PPM);
+        fdef.filter.categoryBits = UnnamedPlatformer.HERO_BIT;
+        fdef.filter.maskBits = UnnamedPlatformer.DEFAULT_BIT | UnnamedPlatformer.CHEST_BIT | UnnamedPlatformer.BRICK_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
         EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2/UnnamedPlatformer.PPM, 8/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,8/UnnamedPlatformer.PPM));
+        head.set(new Vector2(-2/UnnamedPlatformer.PPM, 6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,6/UnnamedPlatformer.PPM));
         fdef.shape = head;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData("head");
 
         EdgeShape feet = new EdgeShape();
-        head.set(new Vector2(-2/UnnamedPlatformer.PPM, -8/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,-8/UnnamedPlatformer.PPM));
+        head.set(new Vector2(-2/UnnamedPlatformer.PPM, -6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,-6/UnnamedPlatformer.PPM));
         fdef.shape = head;
         fdef.isSensor = false;
         b2body.createFixture(fdef).setUserData("feet");
