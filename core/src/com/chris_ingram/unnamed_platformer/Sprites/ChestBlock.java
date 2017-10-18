@@ -1,5 +1,6 @@
 package com.chris_ingram.unnamed_platformer.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,8 +14,13 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  */
 
 public class ChestBlock extends InteravtiveTileObject {
+    @Override
+    public void onHeadHit() {
+        Gdx.app.log("Chest","");
+    }
+
     public ChestBlock(World world, TiledMap map, Rectangle bounds){
         super(world,map,bounds);
-
+        fixture.setUserData(this);
     }
 }

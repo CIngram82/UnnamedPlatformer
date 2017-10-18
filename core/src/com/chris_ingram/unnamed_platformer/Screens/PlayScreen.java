@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
 import com.chris_ingram.unnamed_platformer.Sprites.Hero;
 import com.chris_ingram.unnamed_platformer.Tools.B2WoldCreator;
+import com.chris_ingram.unnamed_platformer.Tools.WorldContactListener;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
@@ -45,7 +46,7 @@ public class PlayScreen implements Screen{
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Cave1.tmx");
+        map = mapLoader.load("level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/UnnamedPlatformer.PPM);
         gameCam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
 
@@ -56,6 +57,8 @@ public class PlayScreen implements Screen{
 
 
         player = new Hero(world, this);
+
+        world.setContactListener( new WorldContactListener());
     }
 
     public TextureAtlas getAtlas(){
