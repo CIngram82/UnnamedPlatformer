@@ -3,6 +3,7 @@ package com.chris_ingram.unnamed_platformer.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
+import com.chris_ingram.unnamed_platformer.Sprites.Trunk;
 import com.chris_ingram.unnamed_platformer.Sprites.Hero;
 import com.chris_ingram.unnamed_platformer.Tools.B2WoldCreator;
 import com.chris_ingram.unnamed_platformer.Tools.WorldContactListener;
@@ -35,9 +37,12 @@ public class PlayScreen implements Screen{
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private Hero player;
+    private Trunk trunk;
 
     private World world;
     private Box2DDebugRenderer b2dr;
+
+    private Music music;
     public PlayScreen(UnnamedPlatformer game) {
         atlas = new TextureAtlas("hero_and_Enemies.pack");
         this.game = game;
@@ -53,12 +58,19 @@ public class PlayScreen implements Screen{
         world = new World(new Vector2(0,-10), true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2WoldCreator(world,map);
+        new B2WoldCreator(this);
 
 
-        player = new Hero(world, this);
+        player = new Hero(this);
 
         world.setContactListener( new WorldContactListener());
+
+        music = UnnamedPlatformer.manager.get("audio/music/Zanzibar.mp3", Music.class);
+        music.setVolume(.1f);
+        music.setLooping(true);
+        music.play();
+
+        trunk = new Trunk(this, .32f, 64f);
     }
 
     public TextureAtlas getAtlas(){
@@ -85,6 +97,7 @@ public class PlayScreen implements Screen{
 
         world.step(1/60f, 6, 2);
         player.update(dt);
+        trunk.update(dt);
         hud.update(dt);
         gameCam.position.x = player.b2body.getPosition().x;
         gameCam.position.y = player.b2body.getPosition().y;
@@ -107,6 +120,7 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix((gameCam.combined));
         game.batch.begin();
         player.draw(game.batch);
+        trunk.draw(game.batch);
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -132,6 +146,13 @@ public class PlayScreen implements Screen{
 
     }
 
+    public TiledMap getMap(){
+        return map;
+    }
+    public World getWorld(){
+        return world;
+    }
+
     @Override
     public void dispose() {
         map.dispose();
@@ -139,6 +160,5 @@ public class PlayScreen implements Screen{
         world.dispose();
         b2dr.dispose();
         hud.dispose();
-
     }
 }

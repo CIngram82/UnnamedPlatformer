@@ -32,8 +32,8 @@ public class Hero extends Sprite {
     private float stateTimer;
 
 
-    public Hero(World world, PlayScreen screen){
-        this.world = world;
+    public Hero(PlayScreen screen){
+        this.world = screen.getWorld();
         currentState = State.STANDING;
         previousState = State.STANDING;
         stateTimer = 0;
@@ -115,7 +115,7 @@ public class Hero extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(6/UnnamedPlatformer.PPM);
         fdef.filter.categoryBits = UnnamedPlatformer.HERO_BIT;
-        fdef.filter.maskBits = UnnamedPlatformer.DEFAULT_BIT | UnnamedPlatformer.CHEST_BIT | UnnamedPlatformer.BRICK_BIT;
+        fdef.filter.maskBits = UnnamedPlatformer.GROUND_BIT | UnnamedPlatformer.CHEST_BIT | UnnamedPlatformer.BRICK_BIT |UnnamedPlatformer.OBJECT_BIT |UnnamedPlatformer.ENEMY_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
