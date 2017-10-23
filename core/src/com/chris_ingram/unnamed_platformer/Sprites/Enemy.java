@@ -20,6 +20,7 @@ public abstract class Enemy extends Sprite{
         setPosition(x,y);
         defineEnemy();
     }
+    public abstract void hitOnHead();
 
     protected abstract void defineEnemy();
 }

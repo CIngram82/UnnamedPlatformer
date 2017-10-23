@@ -5,7 +5,10 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.chris_ingram.unnamed_platformer.Sprites.Enemy;
+import com.chris_ingram.unnamed_platformer.Sprites.Trunk;
 import com.chris_ingram.unnamed_platformer.Sprites.interavtiveTileObject;
+import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
  * Created by cingr on 10/16/2017.
@@ -17,6 +20,8 @@ public class WorldContactListener implements ContactListener{
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+
         if ("head".equals(fixA.getUserData()) || "head".equals(fixB.getUserData())){
             Fixture head = fixA.getUserData() == "head" ? fixA: fixB;
             Fixture object = head == fixA ? fixB : fixA;
@@ -24,6 +29,15 @@ public class WorldContactListener implements ContactListener{
             if(object.getUserData() instanceof interavtiveTileObject){
                 ((interavtiveTileObject) object.getUserData()).onHeadHit();
             }
+        }
+
+        switch (cDef){
+            case UnnamedPlatformer.ENEMY_HEAD_BIT | UnnamedPlatformer.HERO_BIT:
+                if(fixA.getFilterData().categoryBits == UnnamedPlatformer.ENEMY_HEAD_BIT)
+                    ((Enemy)fixA.getUserData()).hitOnHead();
+                else
+                    ((Enemy)fixB.getUserData()).hitOnHead();
+
         }
     }
 

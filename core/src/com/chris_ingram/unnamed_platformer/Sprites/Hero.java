@@ -115,7 +115,12 @@ public class Hero extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(6/UnnamedPlatformer.PPM);
         fdef.filter.categoryBits = UnnamedPlatformer.HERO_BIT;
-        fdef.filter.maskBits = UnnamedPlatformer.GROUND_BIT | UnnamedPlatformer.CHEST_BIT | UnnamedPlatformer.BRICK_BIT |UnnamedPlatformer.OBJECT_BIT |UnnamedPlatformer.ENEMY_BIT;
+        fdef.filter.maskBits = UnnamedPlatformer.GROUND_BIT |
+                UnnamedPlatformer.CHEST_BIT |
+                UnnamedPlatformer.BRICK_BIT |
+                UnnamedPlatformer.OBJECT_BIT |
+                UnnamedPlatformer.ENEMY_BIT |
+                UnnamedPlatformer.ENEMY_HEAD_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
