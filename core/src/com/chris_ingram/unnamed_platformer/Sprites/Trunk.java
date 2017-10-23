@@ -1,6 +1,7 @@
 package com.chris_ingram.unnamed_platformer.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -18,6 +19,7 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 public class Trunk extends Enemy{
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
+    private Animation<TextureRegion> deathAnimation;
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
@@ -28,6 +30,11 @@ public class Trunk extends Enemy{
         for(int i =0; i < 7 ; i++)
             frames.add(new TextureRegion(screen.getAtlas().findRegion("totem_walk"), i* 32 ,0 , 32,32));
         walkAnimation = new Animation<TextureRegion>(0.25f, frames);
+        frames.clear();
+        for(int i =0; i < 7 ; i++)
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("totem_die"), i* 32 ,0 , 32,32));
+        deathAnimation = new Animation<TextureRegion>(0.15f, frames);
+        frames.clear();
         stateTime = 0;
         setBounds(getX(),getY(), 16/UnnamedPlatformer.PPM, 16/UnnamedPlatformer.PPM );
         setToDestroy = false;
@@ -39,8 +46,11 @@ public class Trunk extends Enemy{
             world.destroyBody(b2body);
             destroyed = true;
             setRegion(new TextureRegion(screen.getAtlas().findRegion("totem_die"),32, 0, 32, 32));
+//                setRegion(deathAnimation.getKeyFrame(stateTime,false));
+            stateTime = 0;
 
         }else if (!destroyed){
+            b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             setRegion(walkAnimation.getKeyFrame(stateTime, true));
         }
@@ -80,6 +90,12 @@ public class Trunk extends Enemy{
         fdef.restitution = .5f;
         fdef.filter.categoryBits = UnnamedPlatformer.ENEMY_HEAD_BIT;
         b2body.createFixture(fdef).setUserData(this);
+    }
+
+    public void draw(Batch batch){
+        if(!destroyed || stateTime < 1){
+            super.draw(batch);
+        }
     }
 
     @Override

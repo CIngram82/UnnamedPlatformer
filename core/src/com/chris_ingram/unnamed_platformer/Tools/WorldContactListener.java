@@ -1,12 +1,12 @@
 package com.chris_ingram.unnamed_platformer.Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.chris_ingram.unnamed_platformer.Sprites.Enemy;
-import com.chris_ingram.unnamed_platformer.Sprites.Trunk;
 import com.chris_ingram.unnamed_platformer.Sprites.interavtiveTileObject;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
@@ -37,6 +37,15 @@ public class WorldContactListener implements ContactListener{
                     ((Enemy)fixA.getUserData()).hitOnHead();
                 else
                     ((Enemy)fixB.getUserData()).hitOnHead();
+                break;
+            case UnnamedPlatformer.ENEMY_BIT | UnnamedPlatformer.OBJECT_BIT:
+                if(fixA.getFilterData().categoryBits == UnnamedPlatformer.ENEMY_BIT)
+                    ((Enemy)fixA.getUserData()).reverseVelocity(true,false);
+                else
+                    ((Enemy)fixB.getUserData()).reverseVelocity(true,false);
+                break;
+            case UnnamedPlatformer.HERO_BIT | UnnamedPlatformer.ENEMY_BIT:
+                Gdx.app.log("hero", "Damage trigger");
 
         }
     }

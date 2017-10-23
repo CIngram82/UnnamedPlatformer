@@ -70,7 +70,7 @@ public class PlayScreen implements Screen{
         music.setLooping(true);
         music.play();
 
-        trunk = new Trunk(this, .32f, 64f);
+        trunk = new Trunk(this, 5.64f, .16f);
     }
 
     public TextureAtlas getAtlas(){
