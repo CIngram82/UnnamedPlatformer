@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
+import com.chris_ingram.unnamed_platformer.Sprites.Enemy;
 import com.chris_ingram.unnamed_platformer.Sprites.Trunk;
 import com.chris_ingram.unnamed_platformer.Sprites.Hero;
 import com.chris_ingram.unnamed_platformer.Tools.B2WoldCreator;
@@ -37,10 +38,10 @@ public class PlayScreen implements Screen{
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private Hero player;
-    private Trunk trunk;
 
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WoldCreator creator;
 
     private Music music;
     public PlayScreen(UnnamedPlatformer game) {
@@ -58,7 +59,7 @@ public class PlayScreen implements Screen{
         world = new World(new Vector2(0,-10), true);
         b2dr = new Box2DDebugRenderer();
 
-        new B2WoldCreator(this);
+        creator = new B2WoldCreator(this);
 
 
         player = new Hero(this);
@@ -68,9 +69,8 @@ public class PlayScreen implements Screen{
         music = UnnamedPlatformer.manager.get("audio/music/Zanzibar.mp3", Music.class);
         music.setVolume(.1f);
         music.setLooping(true);
-        music.play();
+//        music.play();
 
-        trunk = new Trunk(this, 5.64f, .16f);
     }
 
     public TextureAtlas getAtlas(){
@@ -97,7 +97,8 @@ public class PlayScreen implements Screen{
 
         world.step(1/60f, 6, 2);
         player.update(dt);
-        trunk.update(dt);
+        for(Enemy enemy : creator.getTrunks())
+            enemy.update(dt);
         hud.update(dt);
         gameCam.position.x = player.b2body.getPosition().x;
         gameCam.position.y = player.b2body.getPosition().y;
@@ -120,7 +121,8 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix((gameCam.combined));
         game.batch.begin();
         player.draw(game.batch);
-        trunk.draw(game.batch);
+        for(Enemy enemy : creator.getTrunks())
+            enemy.draw(game.batch);
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
