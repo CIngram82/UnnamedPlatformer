@@ -1,4 +1,4 @@
-package com.chris_ingram.unnamed_platformer.Sprites;
+package com.chris_ingram.unnamed_platformer.Sprites.Enemies;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,7 +16,7 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  * Created by cingr on 10/20/2017.
  */
 
-public class Trunk extends Enemy{
+public class Trunk extends com.chris_ingram.unnamed_platformer.Sprites.Enemies.Enemy {
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
     private Animation<TextureRegion> deathAnimation;
@@ -73,7 +73,6 @@ public class Trunk extends Enemy{
                 UnnamedPlatformer.ENEMY_BIT |
                 UnnamedPlatformer.OBJECT_BIT |
                 UnnamedPlatformer.HERO_BIT;
-
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

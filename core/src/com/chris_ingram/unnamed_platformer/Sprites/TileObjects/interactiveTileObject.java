@@ -1,4 +1,4 @@
-package com.chris_ingram.unnamed_platformer.Sprites;
+package com.chris_ingram.unnamed_platformer.Sprites.TileObjects;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -18,15 +18,17 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  * Created by cingr on 10/15/2017.
  */
 
-public abstract class interavtiveTileObject {
+public abstract class interactiveTileObject {
     protected World world;
     protected TiledMap map;
     protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
     protected Fixture fixture;
+    protected PlayScreen screen;
 
-    public interavtiveTileObject(PlayScreen screen, Rectangle bounds) {
+    public interactiveTileObject(PlayScreen screen, Rectangle bounds) {
+        this.screen = screen;
         this.world = screen.getWorld();
         this.map = screen.getMap();
         this.bounds = bounds;

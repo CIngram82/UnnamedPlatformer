@@ -13,15 +13,20 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
-import com.chris_ingram.unnamed_platformer.Sprites.Enemy;
-import com.chris_ingram.unnamed_platformer.Sprites.Trunk;
+import com.chris_ingram.unnamed_platformer.Sprites.Enemies.Enemy;
 import com.chris_ingram.unnamed_platformer.Sprites.Hero;
+import com.chris_ingram.unnamed_platformer.Sprites.Items.Item;
+import com.chris_ingram.unnamed_platformer.Sprites.Items.ItemDef;
+import com.chris_ingram.unnamed_platformer.Sprites.Items.Mushroom;
 import com.chris_ingram.unnamed_platformer.Tools.B2WoldCreator;
 import com.chris_ingram.unnamed_platformer.Tools.WorldContactListener;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by cingr on 10/14/2017.
@@ -44,6 +49,10 @@ public class PlayScreen implements Screen{
     private B2WoldCreator creator;
 
     private Music music;
+
+    private Array<Item> items;
+    private LinkedBlockingQueue<ItemDef> itemsToSpawn;
+
     public PlayScreen(UnnamedPlatformer game) {
         atlas = new TextureAtlas("hero_and_Enemies.pack");
         this.game = game;
@@ -71,6 +80,21 @@ public class PlayScreen implements Screen{
         music.setLooping(true);
 //        music.play();
 
+        items = new Array<Item>();
+        itemsToSpawn = new LinkedBlockingQueue<ItemDef>();
+    }
+
+    public void spawnItem(ItemDef idef){
+        itemsToSpawn.add(idef);
+    }
+
+    public void handleSpawningItems(){
+        if (!itemsToSpawn.isEmpty()){
+            ItemDef idef = itemsToSpawn.poll();
+            if (idef.type == Mushroom.class){
+                items.add(new Mushroom(this, idef.position.x,idef.position.y));
+            }
+        }
     }
 
     public TextureAtlas getAtlas(){
@@ -94,11 +118,19 @@ public class PlayScreen implements Screen{
     }
     public void update(float dt){
         handleInput(dt);
+        handleSpawningItems();
 
         world.step(1/60f, 6, 2);
         player.update(dt);
-        for(Enemy enemy : creator.getTrunks())
+        for(Enemy enemy : creator.getTrunks()) {
             enemy.update(dt);
+            if (enemy.getX() < player.getX() + 224/UnnamedPlatformer.PPM)
+                enemy.b2body.setActive(true);
+        }
+
+        for (Item item : items)
+            item.update(dt);
+
         hud.update(dt);
         gameCam.position.x = player.b2body.getPosition().x;
         gameCam.position.y = player.b2body.getPosition().y;
@@ -123,6 +155,9 @@ public class PlayScreen implements Screen{
         player.draw(game.batch);
         for(Enemy enemy : creator.getTrunks())
             enemy.draw(game.batch);
+        for (Item item : items)
+            item.draw(game.batch);
+
         game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();

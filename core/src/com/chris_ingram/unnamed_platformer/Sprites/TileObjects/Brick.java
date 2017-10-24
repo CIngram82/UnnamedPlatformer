@@ -1,10 +1,7 @@
-package com.chris_ingram.unnamed_platformer.Sprites;
+package com.chris_ingram.unnamed_platformer.Sprites.TileObjects;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
 import com.chris_ingram.unnamed_platformer.Screens.PlayScreen;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
@@ -13,7 +10,7 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  * Created by cingr on 10/15/2017.
  */
 
-public class Brick extends interavtiveTileObject {
+public class Brick extends interactiveTileObject {
     @Override
     public void onHeadHit() {
         setCategoryFilter(UnnamedPlatformer.DESTROYED_BIT);

@@ -1,4 +1,4 @@
-package com.chris_ingram.unnamed_platformer.Sprites;
+package com.chris_ingram.unnamed_platformer.Sprites.Enemies;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +21,8 @@ public abstract class Enemy extends Sprite{
         this.screen = screen;
         setPosition(x,y);
         defineEnemy();
-        velocity = new Vector2( 0.66f,0);
+        velocity = new Vector2( -0.66f,-2);
+        b2body.setActive(false);
     }
     public abstract void hitOnHead();
 

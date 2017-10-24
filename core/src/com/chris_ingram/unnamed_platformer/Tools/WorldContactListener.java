@@ -6,8 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.chris_ingram.unnamed_platformer.Sprites.Enemy;
-import com.chris_ingram.unnamed_platformer.Sprites.interavtiveTileObject;
+import com.chris_ingram.unnamed_platformer.Sprites.Enemies.Enemy;
+import com.chris_ingram.unnamed_platformer.Sprites.TileObjects.interactiveTileObject;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
@@ -26,8 +26,8 @@ public class WorldContactListener implements ContactListener{
             Fixture head = fixA.getUserData() == "head" ? fixA: fixB;
             Fixture object = head == fixA ? fixB : fixA;
 
-            if(object.getUserData() instanceof interavtiveTileObject){
-                ((interavtiveTileObject) object.getUserData()).onHeadHit();
+            if(object.getUserData() instanceof interactiveTileObject){
+                ((interactiveTileObject) object.getUserData()).onHeadHit();
             }
         }
 
@@ -46,6 +46,11 @@ public class WorldContactListener implements ContactListener{
                 break;
             case UnnamedPlatformer.HERO_BIT | UnnamedPlatformer.ENEMY_BIT:
                 Gdx.app.log("hero", "Damage trigger");
+                break;
+            case UnnamedPlatformer.ENEMY_BIT | UnnamedPlatformer.ENEMY_BIT:
+                ((Enemy)fixA.getUserData()).reverseVelocity(true,false);
+                ((Enemy)fixB.getUserData()).reverseVelocity(true,false);
+                break;
 
         }
     }

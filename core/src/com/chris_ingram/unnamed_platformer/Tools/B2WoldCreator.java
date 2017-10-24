@@ -11,9 +11,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.chris_ingram.unnamed_platformer.Screens.PlayScreen;
-import com.chris_ingram.unnamed_platformer.Sprites.Brick;
-import com.chris_ingram.unnamed_platformer.Sprites.ChestBlock;
-import com.chris_ingram.unnamed_platformer.Sprites.Trunk;
+import com.chris_ingram.unnamed_platformer.Sprites.TileObjects.Brick;
+import com.chris_ingram.unnamed_platformer.Sprites.TileObjects.ChestBlock;
+import com.chris_ingram.unnamed_platformer.Sprites.Enemies.Trunk;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
