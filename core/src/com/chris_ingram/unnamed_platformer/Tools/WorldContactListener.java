@@ -7,7 +7,9 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.chris_ingram.unnamed_platformer.Sprites.Enemies.Enemy;
-import com.chris_ingram.unnamed_platformer.Sprites.TileObjects.interactiveTileObject;
+import com.chris_ingram.unnamed_platformer.Sprites.Hero;
+import com.chris_ingram.unnamed_platformer.Sprites.Items.Item;
+import com.chris_ingram.unnamed_platformer.Sprites.TileObjects.InteractiveTileObject;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
@@ -21,15 +23,6 @@ public class WorldContactListener implements ContactListener{
         Fixture fixB = contact.getFixtureB();
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
-
-        if ("head".equals(fixA.getUserData()) || "head".equals(fixB.getUserData())){
-            Fixture head = fixA.getUserData() == "head" ? fixA: fixB;
-            Fixture object = head == fixA ? fixB : fixA;
-
-            if(object.getUserData() instanceof interactiveTileObject){
-                ((interactiveTileObject) object.getUserData()).onHeadHit();
-            }
-        }
 
         switch (cDef){
             case UnnamedPlatformer.ENEMY_HEAD_BIT | UnnamedPlatformer.HERO_BIT:
@@ -51,7 +44,34 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixA.getUserData()).reverseVelocity(true,false);
                 ((Enemy)fixB.getUserData()).reverseVelocity(true,false);
                 break;
-
+            case UnnamedPlatformer.ITEM_BIT | UnnamedPlatformer.OBJECT_BIT:
+                if(fixA.getFilterData().categoryBits == UnnamedPlatformer.ITEM_BIT)
+                    ((Item)fixA.getUserData()).reverseVelocity(true,false);
+                else
+                    ((Item)fixB.getUserData()).reverseVelocity(true,false);
+                break;
+            case UnnamedPlatformer.ITEM_BIT | UnnamedPlatformer.HERO_BIT:
+                if(fixA.getFilterData().categoryBits == UnnamedPlatformer.ITEM_BIT)
+                    ((Item)fixA.getUserData()).use((Hero)fixB.getUserData());
+                else
+                    ((Item)fixB.getUserData()).use((Hero)fixA.getUserData());
+                break;
+            case UnnamedPlatformer.BRICK_BIT | UnnamedPlatformer.HERO_HEAD_BIT:
+                if (fixA.getFilterData().categoryBits == UnnamedPlatformer.HERO_HEAD_BIT){
+                    ((InteractiveTileObject)(fixB.getUserData())).onHeadHit();
+                }
+                else if (fixB.getFilterData().categoryBits == UnnamedPlatformer.HERO_HEAD_BIT){
+                    ((InteractiveTileObject)(fixA.getUserData())).onHeadHit();
+                }
+                break;
+            case UnnamedPlatformer.CHEST_BIT | UnnamedPlatformer.HERO_HEAD_BIT:
+                if (fixA.getFilterData().categoryBits == UnnamedPlatformer.HERO_HEAD_BIT){
+                    ((InteractiveTileObject)(fixB.getUserData())).onHeadHit();
+                }
+                else if (fixB.getFilterData().categoryBits == UnnamedPlatformer.HERO_HEAD_BIT){
+                    ((InteractiveTileObject)(fixA.getUserData())).onHeadHit();
+                }
+                break;
         }
     }
 

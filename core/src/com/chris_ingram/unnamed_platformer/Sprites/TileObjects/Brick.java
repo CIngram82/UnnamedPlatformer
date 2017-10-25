@@ -10,7 +10,7 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  * Created by cingr on 10/15/2017.
  */
 
-public class Brick extends interactiveTileObject {
+public class Brick extends InteractiveTileObject {
     @Override
     public void onHeadHit() {
         setCategoryFilter(UnnamedPlatformer.DESTROYED_BIT);

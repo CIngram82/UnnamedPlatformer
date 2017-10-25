@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.chris_ingram.unnamed_platformer.Screens.PlayScreen;
+import com.chris_ingram.unnamed_platformer.Sprites.Hero;
 import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
 
 /**
@@ -31,7 +32,7 @@ public abstract class Item extends Sprite{
     }
 
     public abstract void defineItem();
-    public abstract void use();
+    public abstract void use(Hero hero);
 
     public void update(float dt){
         if(toDestroy && !destroyed){
@@ -46,5 +47,11 @@ public abstract class Item extends Sprite{
     }
     public void destroy(){
         toDestroy = true;
+    }
+    public void reverseVelocity(boolean x, boolean y){
+        if (x)
+            velocity.x = -velocity.x;
+        if (y)
+            velocity.y = -velocity.y;
     }
 }

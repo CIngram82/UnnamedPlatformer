@@ -120,22 +120,24 @@ public class Hero extends Sprite {
                 UnnamedPlatformer.BRICK_BIT |
                 UnnamedPlatformer.OBJECT_BIT |
                 UnnamedPlatformer.ENEMY_BIT |
+                UnnamedPlatformer.ITEM_BIT|
                 UnnamedPlatformer.ENEMY_HEAD_BIT;
 
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
 
         EdgeShape head = new EdgeShape();
         head.set(new Vector2(-2/UnnamedPlatformer.PPM, 6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,6/UnnamedPlatformer.PPM));
         fdef.shape = head;
+        fdef.filter.categoryBits = UnnamedPlatformer.HERO_HEAD_BIT;
         fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("head");
+        b2body.createFixture(fdef).setUserData(this);
 
-        EdgeShape feet = new EdgeShape();
-        head.set(new Vector2(-2/UnnamedPlatformer.PPM, -6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,-6/UnnamedPlatformer.PPM));
-        fdef.shape = head;
-        fdef.isSensor = false;
-        b2body.createFixture(fdef).setUserData("feet");
+//        EdgeShape feet = new EdgeShape();
+//        head.set(new Vector2(-2/UnnamedPlatformer.PPM, -6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,-6/UnnamedPlatformer.PPM));
+//        fdef.shape = feet;
+//        fdef.isSensor = true;
+//        b2body.createFixture(fdef).setUserData(this);
 
     }
 }

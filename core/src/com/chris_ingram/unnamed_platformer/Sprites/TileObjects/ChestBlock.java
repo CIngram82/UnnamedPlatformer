@@ -14,7 +14,7 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  * Created by cingr on 10/15/2017.
  */
 
-public class ChestBlock extends interactiveTileObject {
+public class ChestBlock extends InteractiveTileObject {
     private static TiledMapTileSet tileSet;
     private final int OPEN_CHEST = 1613;
     private boolean isClosed = true;
