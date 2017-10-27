@@ -1,6 +1,7 @@
 package com.chris_ingram.unnamed_platformer.Sprites.TileObjects;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.chris_ingram.unnamed_platformer.Scenes.Hud;
 import com.chris_ingram.unnamed_platformer.Screens.PlayScreen;
@@ -20,8 +21,8 @@ public class Brick extends InteractiveTileObject {
 
     }
 
-    public Brick(PlayScreen playScreen, Rectangle bounds) {
-        super(playScreen, bounds);
+    public Brick(PlayScreen playScreen, MapObject object) {
+        super(playScreen, object);
         fixture.setUserData(this);
         setCategoryFilter(UnnamedPlatformer.BRICK_BIT);
 

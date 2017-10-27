@@ -133,11 +133,11 @@ public class Hero extends Sprite {
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData(this);
 
-//        EdgeShape feet = new EdgeShape();
-//        head.set(new Vector2(-2/UnnamedPlatformer.PPM, -6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,-6/UnnamedPlatformer.PPM));
-//        fdef.shape = feet;
-//        fdef.isSensor = true;
-//        b2body.createFixture(fdef).setUserData(this);
+        EdgeShape feet = new EdgeShape();
+        head.set(new Vector2(-2/UnnamedPlatformer.PPM, -6/UnnamedPlatformer.PPM),new Vector2(2/UnnamedPlatformer.PPM,-6/UnnamedPlatformer.PPM));
+        fdef.shape = feet;
+        fdef.isSensor = true;
+        b2body.createFixture(fdef).setUserData(this);
 
     }
 }

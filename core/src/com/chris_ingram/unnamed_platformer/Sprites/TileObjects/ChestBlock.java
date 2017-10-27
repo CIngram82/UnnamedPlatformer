@@ -1,6 +1,7 @@
 package com.chris_ingram.unnamed_platformer.Sprites.TileObjects;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -18,8 +19,8 @@ public class ChestBlock extends InteractiveTileObject {
     private static TiledMapTileSet tileSet;
     private final int OPEN_CHEST = 1613;
     private boolean isClosed = true;
-    public ChestBlock(PlayScreen playScreen, Rectangle bounds){
-        super(playScreen,bounds);
+    public ChestBlock(PlayScreen playScreen, MapObject object){
+        super(playScreen,object);
         tileSet = map.getTileSets().getTileSet("atlas");
         fixture.setUserData(this);
         setCategoryFilter(UnnamedPlatformer.CHEST_BIT);
@@ -27,19 +28,23 @@ public class ChestBlock extends InteractiveTileObject {
 
     @Override
     public void onHeadHit() {
-        getCell().setTile(tileSet.getTile(OPEN_CHEST));
-        if(isClosed){
-            UnnamedPlatformer.manager.get("audio/sounds/coin.wav", Sound.class).play();
-            screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x,
-                    body.getPosition().y+ 16/UnnamedPlatformer.PPM),
-                    Mushroom.class));
-            Hud.addScore(1000);
-            isClosed = false;
-        }else {
+        if(!isClosed)
             UnnamedPlatformer.manager.get("audio/sounds/bump.wav", Sound.class).play();
-
+        else{
+            if (object.getProperties().containsKey("mushroom")){
+                screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x,
+                        body.getPosition().y+ 16/UnnamedPlatformer.PPM),
+                        Mushroom.class));
+                UnnamedPlatformer.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();
+            } else {
+                UnnamedPlatformer.manager.get("audio/sounds/coin.wav", Sound.class).play();
+                Hud.addScore(1000);
+            }
+            isClosed = false;
         }
+        getCell().setTile(tileSet.getTile(OPEN_CHEST));
     }
+
 
 
 }
