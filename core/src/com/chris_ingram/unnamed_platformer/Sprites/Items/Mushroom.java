@@ -1,5 +1,6 @@
 package com.chris_ingram.unnamed_platformer.Sprites.Items;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -43,13 +44,17 @@ public class Mushroom extends Item{
     @Override
     public void use(Hero hero) {
         destroy();
+        hero.heroPowerUp();
+
     }
 
     @Override
     public void update(float dt) {
         super.update(dt);
+         if (!destroyed){
         setPosition(body.getPosition().x - getWidth()/2,body.getPosition().y - getHeight()/2);
         velocity.y = body.getLinearVelocity().y;
         body.setLinearVelocity(velocity);
+        }
     }
 }

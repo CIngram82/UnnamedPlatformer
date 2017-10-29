@@ -1,5 +1,6 @@
 package com.chris_ingram.unnamed_platformer.Sprites;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,17 +20,28 @@ import com.chris_ingram.unnamed_platformer.UnnamedPlatformer;
  */
 
 public class Hero extends Sprite {
-    public enum State {FALLING, JUMPING, STANDING, RUNNING }
+    public enum State {FALLING, JUMPING, STANDING, RUNNING, POWERINGUP }
     public State currentState;
     public State previousState;
     public World world;
     public Body b2body;
+
     private TextureRegion heroStand;
     private Animation<TextureRegion> heroRun;
     private Animation<TextureRegion> heroJump;
     private Animation<TextureRegion> heroFall;
+
+    private TextureRegion heroPowerUpStand;
+    private Animation<TextureRegion> heroPowerUpRun;
+    private Animation<TextureRegion> heroPowerUpJump;
+    private Animation<TextureRegion> heroPowerUpFall;
+
+    private Animation<TextureRegion> heroPoweringUp;
+
     private boolean runningRight;
     private float stateTimer;
+    private boolean heroPoweredUp;
+    private boolean runPowerUpAnimation;
 
 
     public Hero(PlayScreen screen){
@@ -39,6 +51,7 @@ public class Hero extends Sprite {
         stateTimer = 0;
         runningRight = true;
 
+        //normal sprites Orange and blue
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i = 0; i < 6; i++ )
             frames.add(new TextureRegion(screen.getAtlas().findRegion("run"),i * 32,8,32,64));
@@ -56,7 +69,32 @@ public class Hero extends Sprite {
         heroStand = new TextureRegion(screen.getAtlas().findRegion("idle"),0,8,32,64);
         setBounds(0,0,12/UnnamedPlatformer.PPM,24/UnnamedPlatformer.PPM);
         setRegion(heroStand);
+
+        // power up sprites Purple and green
+        for (int i = 0; i < 6; i++ )
+            frames.add(new TextureRegion(screen.getPowerUpAtlas().findRegion("run"),i * 32,8,32,64));
+        heroPowerUpRun = new Animation<TextureRegion>(0.1f,frames);
+        frames.clear();
+        for (int i = 0; i < 3; i++)
+            frames.add(new TextureRegion(screen.getPowerUpAtlas().findRegion("jump"),i*32,0,32,64));
+        heroPowerUpJump = new Animation<TextureRegion>(0.1f,frames);
+        frames.clear();
+        for (int i = 0; i < 3; i++ )
+            frames.add(new TextureRegion(screen.getPowerUpAtlas().findRegion("fall"),i*32,0,31,48));
+        heroPowerUpFall = new Animation<TextureRegion>(0.1f,frames);
+        frames.clear();
+        heroPowerUpStand = new TextureRegion(screen.getPowerUpAtlas().findRegion("idle"),0,8,32,64);
+
+        // Change from orange and blue to purple and green;
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("idle"),0,8,32,64));
+        frames.add(new TextureRegion(screen.getPowerUpAtlas().findRegion("idle"),0,8,32,64));
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("idle"),0,8,32,64));
+        frames.add(new TextureRegion(screen.getPowerUpAtlas().findRegion("idle"),0,8,32,64));
+        heroPoweringUp = new Animation<TextureRegion>(0.2f,frames);
+        frames.clear();
+
     }
+
     public void update(float dt){
         setPosition(b2body.getPosition().x -(getWidth()/ 2),b2body.getPosition().y -(getHeight()/ 2));
         setRegion(getFrame(dt));
@@ -67,18 +105,23 @@ public class Hero extends Sprite {
 
         TextureRegion region;
         switch (currentState){
+            case POWERINGUP:
+                region = heroPoweringUp.getKeyFrame(stateTimer);
+                if (heroPoweringUp.isAnimationFinished(stateTimer))
+                    runPowerUpAnimation = false;
+                break;
             case JUMPING:
-                region = heroJump.getKeyFrame(stateTimer);
+                region = heroPoweredUp ? heroPowerUpJump.getKeyFrame(stateTimer) : heroJump.getKeyFrame(stateTimer);
                 break;
             case RUNNING:
-                region = heroRun.getKeyFrame(stateTimer, true);
+                region = heroPoweredUp ? heroPowerUpRun.getKeyFrame(stateTimer, true) : heroRun.getKeyFrame(stateTimer, true);
                 break;
             case FALLING:
-                region = heroFall.getKeyFrame(stateTimer);
+                region = heroPoweredUp ? heroPowerUpFall.getKeyFrame(stateTimer) :heroFall.getKeyFrame(stateTimer);
                 break;
             case STANDING:
             default:
-                region = heroStand;
+                region = heroPoweredUp ? heroPowerUpStand : heroStand;
                 break;
         }
         if ((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
@@ -95,7 +138,10 @@ public class Hero extends Sprite {
     }
 
     public State getState(){
-        if(b2body.getLinearVelocity().y >0)
+        if(runPowerUpAnimation)
+            return State.POWERINGUP;
+
+        else if(b2body.getLinearVelocity().y >0)
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y <0)
             return State.FALLING;
@@ -138,6 +184,13 @@ public class Hero extends Sprite {
         fdef.shape = feet;
         fdef.isSensor = true;
         b2body.createFixture(fdef).setUserData(this);
+
+    }
+
+    public void heroPowerUp(){
+        runPowerUpAnimation = true;
+        heroPoweredUp = true;
+        UnnamedPlatformer.manager.get("audio/sounds/powerup.wav", Sound.class).play();
 
     }
 }

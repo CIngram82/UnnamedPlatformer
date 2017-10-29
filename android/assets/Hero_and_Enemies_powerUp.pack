@@ -1,0 +1,166 @@
+
+Hero_and_Enemies.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+spinjump
+  rotate: false
+  xy: 1, 185
+  size: 352, 64
+  orig: 352, 64
+  offset: 0, 0
+  index: -1
+push
+  rotate: false
+  xy: 1, 119
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+run
+  rotate: false
+  xy: 1, 53
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+totem_die
+  rotate: false
+  xy: 1, 19
+  size: 224, 32
+  orig: 224, 32
+  offset: 0, 0
+  index: -1
+walk
+  rotate: false
+  xy: 195, 119
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+totem_walk
+  rotate: false
+  xy: 195, 85
+  size: 224, 32
+  orig: 224, 32
+  offset: 0, 0
+  index: -1
+jump
+  rotate: false
+  xy: 355, 185
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+wall_slide
+  rotate: false
+  xy: 389, 119
+  size: 96, 64
+  orig: 96, 64
+  offset: 0, 0
+  index: -1
+bonk
+  rotate: false
+  xy: 453, 185
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+fall
+  rotate: false
+  xy: 227, 35
+  size: 93, 48
+  orig: 93, 48
+  offset: 0, 0
+  index: -1
+down
+  rotate: false
+  xy: 322, 19
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+idle
+  rotate: false
+  xy: 356, 19
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+pivot
+  rotate: false
+  xy: 390, 19
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+idle1-sheet
+  rotate: false
+  xy: 1, 1
+  size: 64, 16
+  orig: 64, 16
+  offset: 0, 0
+  index: -1
+up
+  rotate: false
+  xy: 424, 53
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+wall_peek
+  rotate: false
+  xy: 458, 53
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+idle1
+  rotate: false
+  xy: 195, 67
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle2
+  rotate: false
+  xy: 67, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle3
+  rotate: false
+  xy: 424, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+idle4
+  rotate: false
+  xy: 487, 233
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+vermelho1
+  rotate: false
+  xy: 85, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+vermelho2
+  rotate: false
+  xy: 442, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+vermelho3
+  rotate: false
+  xy: 487, 215
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1

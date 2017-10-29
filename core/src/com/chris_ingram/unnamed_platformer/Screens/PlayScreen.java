@@ -35,6 +35,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class PlayScreen implements Screen{
     private UnnamedPlatformer game;
     private TextureAtlas atlas;
+    private TextureAtlas powerUpAtlas;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
@@ -55,6 +56,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(UnnamedPlatformer game) {
         atlas = new TextureAtlas("hero_and_Enemies.pack");
+        powerUpAtlas = new TextureAtlas("hero_and_Enemies_powerUp.pack");
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(UnnamedPlatformer.V_WIDTH /UnnamedPlatformer.PPM,UnnamedPlatformer.V_HEIGHT/UnnamedPlatformer.PPM, gameCam);
@@ -99,6 +101,10 @@ public class PlayScreen implements Screen{
 
     public TextureAtlas getAtlas(){
         return atlas;
+    }
+
+    public TextureAtlas getPowerUpAtlas(){
+        return powerUpAtlas;
     }
 
     @Override
